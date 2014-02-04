@@ -9,10 +9,7 @@ Espresso:
 Espresso is a testing library based on Android Instrumentation tests
 https://code.google.com/p/android-test-kit/wiki/Espresso
 
-Espresso waits before checking assertions to be idle:
-it checks the mainlooper and AsyncTasks default-executor
-
-But custom threads and threadpools but be registerd as "IdleResource" to be monitored.
+Before checking assertions Espresso waits to let app be idle. Therefore it checks the mainlooper and AsyncTasks default-executor. But custom threads and threadpools but be registerd as "IdleResource" to be monitored.
 
 IdleResource for Android Priority-JobQueue
 ------------------------------------------------------------------
@@ -25,8 +22,7 @@ Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(manager));
 
 New Relic implementations for OkHttp
 ====================================
-New Relic is an app monitoring tool
-It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
+New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
 https://docs.newrelic.com/docs/mobile-apps/android-api
 
 New Relic Trace for Retrofit
