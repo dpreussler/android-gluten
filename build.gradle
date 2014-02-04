@@ -1,7 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-
 repositories {
     mavenCentral()
 }
@@ -17,5 +16,9 @@ dependencies {
 	compile 'com.squareup.okhttp:okhttp:1.2.1'
     compile 'com.newrelic.agent.android:android-agent:3.239.0'
     compile 'org.robolectric:robolectric:2.2'
-    
+}
+
+compileJava {
+  sourceCompatibility = 1.6
+  targetCompatibility = 1.6
 }
