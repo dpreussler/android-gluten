@@ -61,4 +61,4 @@ TODO: very basic for now, no load tracking
 
 
 These source samples are licensed under MIT license
-(c) 2013 Danny Preussler
+(c) 2014 Danny Preussler
