@@ -5,7 +5,7 @@ Gluten is what it all holds together.
 This is the glue code between popular android libraries. 
 
 Espresso:
-==============
+=========
 Espresso is a testing library based on Android Instrumentation tests
 https://code.google.com/p/android-test-kit/wiki/Espresso
 
@@ -14,7 +14,7 @@ it checks the mainlooper and AsyncTasks default-executor
 
 But custom threads and threadpools but be registerd as "IdleResource" to be monitored.
 
-Espresso IdleResource implementation for Android Priority-JobQueue
+IdleResource for Android Priority-JobQueue
 ------------------------------------------------------------------
 https://github.com/path/android-priority-jobqueue
 
@@ -23,14 +23,14 @@ Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(manager));
 
 
 
-New Relic implementations
-=========================
+New Relic implementations for OkHttp
+====================================
 New Relic is an app monitoring tool
 It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
 https://docs.newrelic.com/docs/mobile-apps/android-api
 
-New Relic Trace implementation for Retrofit (+OkHttp)
------------------------------------------------------
+New Relic Trace for Retrofit
+-------------------------------------------
 
 Usage: 
 instead of
@@ -42,8 +42,8 @@ https://github.com/square/okhttp
 
 TODO: very basic for now, no load tracking
 
-New Relic Trace implementation for Picasso Image Loader (based on OkHttp)
--------------------------------------------------------------------------
+New Relic Trace for Picasso
+---------------------------
 
 Usage: 
 create your Picasso instance with something like this:
