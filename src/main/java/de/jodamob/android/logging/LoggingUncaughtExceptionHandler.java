@@ -5,12 +5,12 @@ import java.lang.Thread.UncaughtExceptionHandler;
 /**
  * default exception handler
  */
-final class LoggingUncaughtExceptionHandler {
+class LoggingUncaughtExceptionHandler {
 
     LoggingUncaughtExceptionHandler() {
     }
     
-    final void register() {
+    void register() {
         UncaughtExceptionHandler hdl = Thread.getDefaultUncaughtExceptionHandler();
         if (hdl instanceof HandlerImplementation) {
             // already done

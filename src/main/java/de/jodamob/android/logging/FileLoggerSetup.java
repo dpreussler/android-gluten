@@ -13,19 +13,23 @@ class FileLoggerSetup {
     private static final String FOLDER_NAME = "logs";
     private static final String FILE_PATTERN = "applog";
     private static final String FILE_EXTENSION = ".log";
-    private Context context;
+    private final Context context;
 
     FileLoggerSetup(Context context) {
         this.context = context;
     }
     
     void prepare(Logger logger) {
-        prepare(logger, getLogDir(context), FILE_PATTERN, FILE_EXTENSION);
-        new LoggingUncaughtExceptionHandler().register();
+        prepare(logger,  new LoggingUncaughtExceptionHandler());
     }
     
-    private static File getLogDir(Context applicationContext) {
-        return new File(applicationContext.getExternalCacheDir(), FOLDER_NAME);
+    void prepare(Logger logger, LoggingUncaughtExceptionHandler excHandler) {
+        prepare(logger, getLogDir(), FILE_PATTERN, FILE_EXTENSION);
+        excHandler.register();
+    }
+    
+    private File getLogDir() {
+        return new File(context.getExternalCacheDir(), FOLDER_NAME);
     }
 
     private void prepare(Logger logger, File logFolder, String logpattern, String logExtention) {

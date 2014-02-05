@@ -5,9 +5,6 @@ public class LogCatLogger implements _Log {
 
     private static final String TAG = "";
 
-    public LogCatLogger() {
-    }
-
     @Override
     public  int v(String tag, String message) {
         return android.util.Log.v(tag, message);
