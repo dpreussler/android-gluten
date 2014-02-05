@@ -70,6 +70,8 @@ FileLogger : writes rotating log files with java.util.logging
 
 SilentLogger: does not log (implements same interface as above, can be used to disable logging)
 
+AsyncLogger : moves all logging into background thread (might be useful in combination with FileLogger)
+
 Log : has the same "interface" as android.util.Log so that only the package has to be changed
 
 Log.initLogger() excepts any of the loggers above

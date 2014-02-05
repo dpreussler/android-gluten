@@ -66,7 +66,7 @@ public class CrashlyticsLogger implements _Log {
     @Override
     public  int e(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(tr);
-        return redirectLog.e(tag, message);
+        return redirectLog.e(tag, message, tr);
     }
 
     @Override

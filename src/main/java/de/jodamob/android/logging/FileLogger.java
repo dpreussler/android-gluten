@@ -72,7 +72,7 @@ public class FileLogger implements _Log {
     @Override
     public  int e(String tag, String message, Throwable tr) {
         logger.severe(message + getStackTraceString(tr));
-        return redirectLog.e(tag, message);
+        return redirectLog.e(tag, message, tr);
     }
 
     @Override

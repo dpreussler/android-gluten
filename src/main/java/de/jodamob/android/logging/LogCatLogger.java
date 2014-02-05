@@ -57,7 +57,7 @@ public class LogCatLogger implements _Log {
 
     @Override
     public  int e(String tag, String message, Throwable tr) {
-        return android.util.Log.e(tag, message);
+        return android.util.Log.e(tag, message, tr);
     }
 
     @Override
