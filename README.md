@@ -60,5 +60,25 @@ https://github.com/square/picasso
 TODO: very basic for now, no load tracking
 
 
+Just another logging framework
+------------------------------
+multiple combinable logging classes
+
+LogCatLogger : writes to android.util.log
+FileLogger : writes rotating log files with java.util.logging
+SilentLogger: does not log (implements same interface as above, can be used to disable logging)
+
+Log : has the same "interface" as android.util.Log so that only the package has to be changed
+Log.initLogger() excepts any of the loggers above
+
+example:
+
+Log.initLogger(new LogCatLogger()) writes to console (default)
+Log.initLogger(new FileLogger(context, new LogCatLogger(()) writes to files + console
+Log.initLogger(new SilentLogger()) disables logging
+
+TODO: will be extended with Crashlytics or New Relic logger to send loggings to remote destinations
+
+
 These source samples are licensed under MIT license
 (c) 2014 Danny Preussler
