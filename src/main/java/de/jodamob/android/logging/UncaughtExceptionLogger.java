@@ -106,18 +106,25 @@ public class UncaughtExceptionLogger implements _Log {
     
     private void registerAsExceptionHandler() {
         UncaughtExceptionHandler hdl = Thread.getDefaultUncaughtExceptionHandler();
-        if (hdl instanceof HandlerImplementation) {
-            // already done
-            return;
+        if (!(hdl instanceof HandlerImplementation)) {
+            Thread.setDefaultUncaughtExceptionHandler(new HandlerImplementation(hdl, redirectLog));
         }
-        Thread.setDefaultUncaughtExceptionHandler(new HandlerImplementation());
     }
 
-    private class HandlerImplementation implements UncaughtExceptionHandler {
+    private static class HandlerImplementation implements UncaughtExceptionHandler {
+
+        private UncaughtExceptionHandler handler;
+        private _Log log;
+
+        public HandlerImplementation(UncaughtExceptionHandler hdl, _Log log) {
+            this.handler = hdl;
+            this.log = log;
+        }
 
         @Override
         public void uncaughtException(Thread thread, Throwable ex) {
-            e("unexpected error", ex);
+            log.e("unexpected error", ex);
+            handler.uncaughtException(thread, ex);
         }
     }
 }

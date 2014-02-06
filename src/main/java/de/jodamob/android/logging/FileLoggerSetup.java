@@ -47,8 +47,9 @@ class FileLoggerSetup {
     }
 
     private void setLoggerToFile(Logger logger, File logFolder, String logpattern, String logExtention) throws IOException {
-        createLogFolder(logFolder);
-        createLogHandler(logger, logFolder, logpattern, logExtention);
+        if (createLogFolder(logFolder)) {
+            createLogHandler(logger, logFolder, logpattern, logExtention);    
+        }
     }
 
     private void createLogHandler(Logger logger, File logFolder, String logpattern, String logExtention) throws IOException {
@@ -56,9 +57,7 @@ class FileLoggerSetup {
         logger.setLevel(Level.INFO);
     }
 
-    private void createLogFolder(File logFolder) throws IOException {
-        if (!logFolder.mkdirs()) {
-            throw new IOException("could note create log directory");
-        }
+    private boolean createLogFolder(File logFolder) {
+        return logFolder.mkdirs();
     }
 }

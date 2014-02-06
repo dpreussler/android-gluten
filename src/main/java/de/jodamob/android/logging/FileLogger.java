@@ -12,8 +12,13 @@ public class FileLogger implements _Log {
         this(context, new SilentLogger());
     }
     
-    public FileLogger(Context context, _Log redirectLog) {
-        new FileLoggerSetup(context).prepare(logger);
+    public FileLogger(final Context context, _Log redirectLog) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new FileLoggerSetup(context).prepare(logger);
+            }
+        }).start();
         this.redirectLog = redirectLog; 
     }
 
