@@ -63,7 +63,9 @@ TODO: very basic for now, no load tracking
 
 Just another logging framework
 ------------------------------
-multiple combinable logging classes
+multiple combinable logging classes.
+Combine local logging with files with Crashlytcs with NewRelic….
+
 
 LogCatLogger : writes to android.util.log
 
@@ -72,6 +74,8 @@ FileLogger : writes rotating log files with java.util.logging
 SilentLogger: does not log (implements same interface as above, can be used to disable logging)
 
 AsyncLogger : moves all logging into background thread (might be useful in combination with FileLogger)
+
+UncaughtExceptionLogger: registers as exception handler in system and reports those exceptions to logfile
 
 CrashlyticsLogger: sends exceptions that where logged to crashlytics as caught crash)
 
@@ -86,6 +90,10 @@ example:
 Log.initLogger(new LogCatLogger()) writes to console (default)
 
 Log.initLogger(new FileLogger(context, new LogCatLogger(()) writes to files + console
+
+Log.initLogger(new UncaughtExceptionLogger(new FileLogger(context) writes logs and uncaught crashes to file 
+
+Log.initLogger(new AsyncLogger(new FileLogger(new CrashlyticsLogger(new LogCatLogger()); writes async to file and crashlytics and logcat
 
 Log.initLogger(new SilentLogger()) disables logging
 
