@@ -73,8 +73,12 @@ SilentLogger: does not log (implements same interface as above, can be used to d
 
 AsyncLogger : moves all logging into background thread (might be useful in combination with FileLogger)
 
-Log : has the same "interface" as android.util.Log so that only the package has to be changed
+CrashlyticsLogger: sends exceptions that where logged to crashlytics as caught crash)
 
+NewRelicLogger: sends exceptions that where logged to NewRelic as Network errors (there is no better way for now in API)
+
+
+Log : has the same "interface" as android.util.Log so that only the package has to be changed with one additional initializer method:
 Log.initLogger() excepts any of the loggers above
 
 example:

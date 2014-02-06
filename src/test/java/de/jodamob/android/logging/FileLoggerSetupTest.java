@@ -39,13 +39,6 @@ public class FileLoggerSetupTest {
     }
     
     @Test
-    public void should_register_exception_handler() {
-        LoggingUncaughtExceptionHandler exceptions = mock(LoggingUncaughtExceptionHandler.class);
-        tested.prepare(logger, exceptions);
-        verify(exceptions).register();
-    }
-    
-    @Test
     public void should_create_log_folder() throws IOException {
         File folder = spy(new File(""));
         when(folder.mkdirs()).thenReturn(true);

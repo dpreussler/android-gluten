@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CrashlyticsLoggerTest {
 
-    CrashlyticsLogger tested;
+    RemoteToolLogger tested;
     
     @Test
     public void test() {
