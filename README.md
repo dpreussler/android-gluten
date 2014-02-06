@@ -23,6 +23,7 @@ Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(
 New Relic implementations for OkHttp
 ====================================
 New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
+REMARK: with latest new relic release 264 this might be obsolete
 
 https://docs.newrelic.com/docs/mobile-apps/android-api
 
