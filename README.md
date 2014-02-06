@@ -20,49 +20,8 @@ Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(
 
 
 
-New Relic implementations for OkHttp
-====================================
-New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
-REMARK: with latest new relic release 264 this might be obsolete
-
-https://docs.newrelic.com/docs/mobile-apps/android-api
-
-New Relic Trace for Retrofit
--------------------------------------------
-
-Usage: 
-instead of
-
-new OkClient(new OkHttpClient()) 
-for the RestAdapter use:
-
-new TracedRetrofitClient(new OkClient(new OkHttpClient()), new NewRelicTracer())
-
-
-
-https://github.com/square/retrofit
-https://github.com/square/okhttp
-
-TODO: very basic for now, no load tracking
-
-New Relic Trace for Picasso
----------------------------
-
-Usage: 
-create your Picasso instance with something like this:
-
-new Picasso.Builder(context).downloader(
-	new TracedPicassoDownloader(new NewRelicTracer(), context)).build();
-
-
-
-https://github.com/square/picasso
-
-TODO: very basic for now, no load tracking
-
-
 Just another logging framework
-------------------------------
+==============================
 multiple combinable logging classes.
 Combine local logging with files with Crashlytcs with NewRelic….
 
@@ -97,8 +56,51 @@ Log.initLogger(new AsyncLogger(new FileLogger(new CrashlyticsLogger(new LogCatLo
 
 Log.initLogger(new SilentLogger()) disables logging
 
+TODO: more unit test needed
 
-TODO: will be extended with Crashlytics or New Relic logger to send loggings to remote destinations
+
+
+New Relic implementations for OkHttp
+====================================
+New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
+REMARK: with latest new relic release 264 this might be obsolete
+
+https://docs.newrelic.com/docs/mobile-apps/android-api
+
+New Relic Trace for Retrofit
+-------------------------------------------
+REMARK: with latest new relic release 264 this might be obsolete
+
+Usage: 
+instead of
+
+new OkClient(new OkHttpClient()) 
+for the RestAdapter use:
+
+new TracedRetrofitClient(new OkClient(new OkHttpClient()), new NewRelicTracer())
+
+
+
+https://github.com/square/retrofit
+https://github.com/square/okhttp
+
+TODO: very basic for now, no load tracking
+
+New Relic Trace for Picasso
+---------------------------
+REMARK: with latest new relic release 264 this might be obsolete
+
+Usage: 
+create your Picasso instance with something like this:
+
+new Picasso.Builder(context).downloader(
+	new TracedPicassoDownloader(new NewRelicTracer(), context)).build();
+
+
+
+https://github.com/square/picasso
+
+TODO: very basic for now, no load tracking
 
 
 These source samples are licensed under MIT license
