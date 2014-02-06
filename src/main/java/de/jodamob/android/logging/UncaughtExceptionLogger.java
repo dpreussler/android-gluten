@@ -1,20 +1,17 @@
 package de.jodamob.android.logging;
 
-import java.util.logging.Logger;
-import android.content.Context;
+import java.lang.Thread.UncaughtExceptionHandler;
 
-public class FileLogger implements _Log {
+/**
+ * redirects logs plus writes uncaught exceptions as errors
+ */
+public class UncaughtExceptionLogger implements _Log {
 
     private final _Log redirectLog;
-    private final Logger logger = Logger.getLogger("");
 
-    public FileLogger(Context context) {
-        this(context, new SilentLogger());
-    }
-    
-    public FileLogger(Context context, _Log redirectLog) {
-        new FileLoggerSetup(context).prepare(logger);
-        this.redirectLog = redirectLog; 
+    public UncaughtExceptionLogger(_Log redirectLog) {
+        this.redirectLog = redirectLog;
+        registerAsExceptionHandler();
     }
 
     @Override
@@ -39,84 +36,88 @@ public class FileLogger implements _Log {
 
     @Override
     public  int i(String tag, String message) {
-        logger.info(message);
         return redirectLog.i(tag, message);
     }
 
     @Override
     public  int i(String tag, String message, Throwable tr) {
-        logger.info(message + Log.getStackTraceString(tr));
         return redirectLog.i(tag, message, tr);
     }
 
     @Override
     public  int w(String tag, String message) {
-        logger.warning(message);
         return redirectLog.w(tag, message);
     }
 
     @Override
     public  int w(String tag, String message, Throwable tr) {
-        logger.warning(message + Log.getStackTraceString(tr));
         return redirectLog.w(tag, message, tr);
     }
 
     @Override
     public  int w(String tag, Throwable tr) {
-        logger.warning(tag + Log.getStackTraceString(tr));
         return redirectLog.w(tag, tr);
     }
 
     @Override
     public  int e(String tag, String message) {
-        logger.severe(message);
         return redirectLog.e(tag, message);
     }
 
     @Override
     public  int e(String tag, String message, Throwable tr) {
-        logger.severe(message + getStackTraceString(tr));
         return redirectLog.e(tag, message, tr);
     }
 
     @Override
     public  int e(String message) {
-        logger.severe(message);
         return redirectLog.e(message);
     }
 
     @Override
     public  int e(String msg, Throwable tr) {
-        logger.severe(msg + getStackTraceString(tr)); 
         return redirectLog.e(msg, tr);
     }
 
     @Override
     public  int wtf(String tag, String message, Throwable tr) {
-        logger.severe(message + getStackTraceString(tr));
         return redirectLog.wtf(tag, message, tr);
     }
 
     @Override
     public  int wtf(String tag, Throwable tr) {
-        logger.severe(tag + getStackTraceString(tr));
         return redirectLog.wtf(tag, tr);
     }
 
     @Override
     public  int wtf(String tag, String message) {
-        logger.severe(message);
         return redirectLog.wtf(tag, message);
     }
 
     @Override
     public  int wtf(Throwable tr) {
-        logger.severe(getStackTraceString(tr));
         return redirectLog.wtf(tr);
     }
 
     @Override
     public  String getStackTraceString(Throwable tr) {
         return redirectLog.getStackTraceString(tr);
+    }
+    
+    private void registerAsExceptionHandler() {
+        UncaughtExceptionHandler hdl = Thread.getDefaultUncaughtExceptionHandler();
+        if (hdl instanceof HandlerImplementation) {
+            // already done
+            return;
+        }
+        Thread.setDefaultUncaughtExceptionHandler(new HandlerImplementation());
+    }
+
+    private class HandlerImplementation implements UncaughtExceptionHandler {
+
+        @Override
+        public void uncaughtException(Thread thread, Throwable ex) {
+            e("unexpected error", ex);
+        }
     }
 }

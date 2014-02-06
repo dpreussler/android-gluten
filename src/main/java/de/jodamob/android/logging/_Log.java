@@ -29,11 +29,11 @@ interface _Log {
 
     int e(String message);
 
-    int e(String msg, Exception tr);
+    int e(String msg, Throwable tr);
 
     int wtf(String tag, String message, Throwable tr);
 
-    int wtf(String tag, Exception tr);
+    int wtf(String tag, Throwable tr);
 
     int wtf(String tag, String message);
 

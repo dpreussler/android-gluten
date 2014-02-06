@@ -70,7 +70,7 @@ public class SilentLogger implements _Log {
     }
 
     @Override
-    public int e(String msg, Exception tr) {
+    public int e(String msg, Throwable tr) {
         return 0;
     }
 
@@ -80,7 +80,7 @@ public class SilentLogger implements _Log {
     }
 
     @Override
-    public int wtf(String tag, Exception tr) {
+    public int wtf(String tag, Throwable tr) {
         return 0;
     }
 

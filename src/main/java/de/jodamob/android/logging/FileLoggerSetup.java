@@ -20,12 +20,7 @@ class FileLoggerSetup {
     }
     
     void prepare(Logger logger) {
-        prepare(logger,  new LoggingUncaughtExceptionHandler());
-    }
-    
-    void prepare(Logger logger, LoggingUncaughtExceptionHandler excHandler) {
         prepare(logger, getLogDir(), FILE_PATTERN, FILE_EXTENSION);
-        excHandler.register();
     }
     
     private File getLogDir() {

@@ -149,7 +149,7 @@ public class AsyncLogger implements _Log {
     }
 
     @Override
-    public  int e(final String msg, final Exception tr) {
+    public  int e(final String msg, final Throwable tr) {
         background.execute(new Runnable() {
             @Override
             public void run() {
@@ -171,7 +171,7 @@ public class AsyncLogger implements _Log {
     }
 
     @Override
-    public  int wtf(final String tag, final Exception tr) {
+    public  int wtf(final String tag, final Throwable tr) {
         background.execute(new Runnable() {
             @Override
             public void run() {
