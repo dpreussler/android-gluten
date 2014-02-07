@@ -23,7 +23,7 @@ Usage:
 Just another logging framework
 ==============================
 multiple combinable logging classes.
-Combine local logging with rolling file logging with Crashlytcs with NewRelic….
+Combine local logging with rolling file logging with Crashlytcs with NewRelic...
 
 
 LogCatLogger : writes to android.util.log
@@ -65,7 +65,7 @@ Or simply create the UberLog:
                         new CrashlyticsLogger(
                                 new LogCatLogger(
                                         new UncaughtExceptionLogger(
-                                                new AsyncLogger(this, 
+                                                new AsyncLogger(context, 
                                                         new FileLogger(context)))))));
 ``` 
 
@@ -73,13 +73,13 @@ Or simply create the UberLog:
 New Relic implementations for OkHttp
 ====================================
 New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
-REMARK: with latest new relic release 264 this might be obsolete
+REMARK: with latest new relic release 264 this is obsolete, will keep as reference
 
 https://docs.newrelic.com/docs/mobile-apps/android-api
 
 New Relic Trace for Retrofit
 -------------------------------------------
-REMARK: with latest new relic release 264 this might be obsolete
+REMARK: with latest new relic release 264 this is obsolete, will keep as reference
 
 Usage: 
 instead of
@@ -98,7 +98,7 @@ TODO: very basic for now, no load tracking
 
 New Relic Trace for Picasso
 ---------------------------
-REMARK: with latest new relic release 264 this might be obsolete
+REMARK: with latest new relic release 264 this is obsolete, will keep as reference
 
 Usage: 
 create your Picasso instance with something like this:
