@@ -59,13 +59,15 @@ example:
 
 Or simply create the UberLog:
 
-`Log.initLogger(
+```
+	Log.initLogger(
                 new NewRelicLogger(
                         new CrashlyticsLogger(
                                 new LogCatLogger(
                                         new UncaughtExceptionLogger(
                                                 new AsyncLogger(this, 
-                                                        new FileLogger(context)))))));`
+                                                        new FileLogger(context)))))));
+``` 
 
 
 New Relic implementations for OkHttp
@@ -101,8 +103,10 @@ REMARK: with latest new relic release 264 this might be obsolete
 Usage: 
 create your Picasso instance with something like this:
 
-`new Picasso.Builder(context).downloader(
-	new TracedPicassoDownloader(new NewRelicTracer(), context)).build();`
+```
+	new Picasso.Builder(context).downloader(
+		new TracedPicassoDownloader(new NewRelicTracer(), context)).build();
+```
 
 
 
