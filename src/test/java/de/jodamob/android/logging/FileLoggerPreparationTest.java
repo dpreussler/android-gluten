@@ -16,16 +16,16 @@ import org.robolectric.RobolectricTestRunner;
 import android.content.Context;
 
 @RunWith(RobolectricTestRunner.class)
-public class FileLoggerSetupTest {
+public class FileLoggerPreparationTest {
 
     Logger logger;
-    FileLoggerAccess tested;
+    FileLoggerPreparation tested;
     Context context;
     
     @Before
     public void setup() {
         context = mock(Context.class);
-        tested = new FileLoggerAccess(context);
+        tested = new FileLoggerPreparation(context);
         Logger javaLogger = Logger.getLogger("testing");
         javaLogger.addHandler(mock(Handler.class));
         logger = spy(javaLogger);
@@ -45,6 +45,5 @@ public class FileLoggerSetupTest {
         when(context.getExternalCacheDir()).thenReturn(folder);
         tested.prepare(logger);
         verify(folder).mkdirs();
-        
     }
 }

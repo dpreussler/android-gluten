@@ -6,8 +6,12 @@ import android.content.Context;
 
 public class FileLogger implements _Log {
 
+    static final String FOLDER_NAME = "logs";
+    static final String FILE_PATTERN = "applog";
+    static final String FILE_EXTENSION = ".log";
+    
     private final _Log redirectLog;
-    private final FileLoggerAccess fileCreator;
+    private final FileLoggerPreparation fileCreator;
     private final Logger logger = Logger.getLogger("");
 
     public FileLogger(Context context) {
@@ -15,11 +19,11 @@ public class FileLogger implements _Log {
     }
     
     public static File getLogFileContent(Context context) {
-        return new FileLoggerAccess(context).getAsSingleLogfile();
+        return new FileLoggerCollector(context).getAsSingleLogfile();
     }
     
     public FileLogger(final Context context, final _Log redirectLog) {
-        this.fileCreator = new FileLoggerAccess(context);
+        this.fileCreator = new FileLoggerPreparation(context);
         this.redirectLog = redirectLog;
         prepareInBackground();
     }
