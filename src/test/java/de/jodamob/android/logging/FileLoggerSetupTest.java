@@ -19,13 +19,13 @@ import android.content.Context;
 public class FileLoggerSetupTest {
 
     Logger logger;
-    FileLoggerSetup tested;
+    FileLoggerAccess tested;
     Context context;
     
     @Before
     public void setup() {
         context = mock(Context.class);
-        tested = new FileLoggerSetup(context);
+        tested = new FileLoggerAccess(context);
         Logger javaLogger = Logger.getLogger("testing");
         javaLogger.addHandler(mock(Handler.class));
         logger = spy(javaLogger);

@@ -1,25 +1,27 @@
 package de.jodamob.android.logging;
 
+import java.io.File;
 import java.util.logging.Logger;
 import android.content.Context;
 
 public class FileLogger implements _Log {
 
     private final _Log redirectLog;
+    private final FileLoggerAccess fileCreator;
     private final Logger logger = Logger.getLogger("");
 
     public FileLogger(Context context) {
         this(context, new SilentLogger());
     }
     
-    public FileLogger(final Context context, _Log redirectLog) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new FileLoggerSetup(context).prepare(logger);
-            }
-        }).start();
-        this.redirectLog = redirectLog; 
+    public static File getLogFileContent(Context context) {
+        return new FileLoggerAccess(context).getAsSingleLogfile();
+    }
+    
+    public FileLogger(final Context context, final _Log redirectLog) {
+        this.fileCreator = new FileLoggerAccess(context);
+        this.redirectLog = redirectLog;
+        prepareInBackground();
     }
 
     @Override
@@ -44,6 +46,7 @@ public class FileLogger implements _Log {
 
     @Override
     public  int i(String tag, String message) {
+        Log.i("LOG", "got message in filelogger");
         logger.info(message);
         return redirectLog.i(tag, message);
     }
@@ -123,5 +126,14 @@ public class FileLogger implements _Log {
     @Override
     public  String getStackTraceString(Throwable tr) {
         return redirectLog.getStackTraceString(tr);
+    }
+    
+    private void prepareInBackground() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                fileCreator.prepare(logger);
+            }
+        }).start();
     }
 }
