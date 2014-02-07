@@ -16,19 +16,19 @@ IdleResource for Android Priority-JobQueue
 https://github.com/path/android-priority-jobqueue
 
 Usage:
-Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(context)));
+`Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(context)));`
 
 
 
 Just another logging framework
 ==============================
 multiple combinable logging classes.
-Combine local logging with files with Crashlytcs with NewRelic….
+Combine local logging with rolling file logging with Crashlytcs with NewRelic….
 
 
 LogCatLogger : writes to android.util.log
 
-FileLogger : writes rotating log files with java.util.logging
+FileLogger : writes rotating log files with java.util.logging (get content written via FileLogger.getLogFileContent() if needed)
 
 SilentLogger: does not log (implements same interface as above, can be used to disable logging)
 
@@ -44,20 +44,28 @@ NewRelicLogger: sends exceptions that where logged to NewRelic as Network errors
 Log : has the same "interface" as android.util.Log so that only the package has to be changed with one additional initializer method:
 Log.initLogger() excepts any of the loggers above
 
+
 example:
 
-Log.initLogger(new LogCatLogger()) writes to console (default)
+`Log.initLogger(new LogCatLogger())` writes to console (default)
 
-Log.initLogger(new FileLogger(context, new LogCatLogger(()) writes to files + console
+`Log.initLogger(new FileLogger(context, new LogCatLogger()))` writes to files + console
 
-Log.initLogger(new UncaughtExceptionLogger(new FileLogger(context) writes logs and uncaught crashes to file 
+`Log.initLogger(new UncaughtExceptionLogger(new FileLogger(context)))` writes logs and uncaught crashes to file 
 
-Log.initLogger(new AsyncLogger(new FileLogger(new CrashlyticsLogger(new LogCatLogger()); writes async to file and crashlytics and logcat
+`Log.initLogger(new AsyncLogger(new FileLogger(new CrashlyticsLogger(new LogCatLogger()))));` writes async to file and crashlytics and logcat
 
-Log.initLogger(new SilentLogger()) disables logging
+`Log.initLogger(new SilentLogger())` disables logging
 
-TODO: more unit test needed
+Or simply create the UberLog:
 
+`Log.initLogger(
+                new NewRelicLogger(
+                        new CrashlyticsLogger(
+                                new LogCatLogger(
+                                        new UncaughtExceptionLogger(
+                                                new AsyncLogger(this, 
+                                                        new FileLogger(context)))))));`
 
 
 New Relic implementations for OkHttp
@@ -74,10 +82,10 @@ REMARK: with latest new relic release 264 this might be obsolete
 Usage: 
 instead of
 
-new OkClient(new OkHttpClient()) 
+`new OkClient(new OkHttpClient()) `
 for the RestAdapter use:
 
-new TracedRetrofitClient(new OkClient(new OkHttpClient()), new NewRelicTracer())
+`new TracedRetrofitClient(new OkClient(new OkHttpClient()), new NewRelicTracer())`
 
 
 
@@ -93,8 +101,8 @@ REMARK: with latest new relic release 264 this might be obsolete
 Usage: 
 create your Picasso instance with something like this:
 
-new Picasso.Builder(context).downloader(
-	new TracedPicassoDownloader(new NewRelicTracer(), context)).build();
+`new Picasso.Builder(context).downloader(
+	new TracedPicassoDownloader(new NewRelicTracer(), context)).build();`
 
 
 
