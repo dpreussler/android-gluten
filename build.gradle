@@ -20,7 +20,6 @@ dependencies {
 	compile 'com.squareup.okhttp:okhttp:1.2.1'
     compile 'com.newrelic.agent.android:android-agent:3.239.0'
 	compile 'com.crashlytics.android:crashlytics:1.1.5'
-    
 
 }
 

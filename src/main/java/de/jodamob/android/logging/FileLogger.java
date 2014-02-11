@@ -50,7 +50,6 @@ public class FileLogger implements _Log {
 
     @Override
     public  int i(String tag, String message) {
-        Log.i("LOG", "got message in filelogger");
         logger.info(message);
         return redirectLog.i(tag, message);
     }
