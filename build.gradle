@@ -1,5 +1,21 @@
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+version = getVersionName()
+group = 'de.jodamob.android'
 
 repositories {
     mavenCentral()
@@ -20,24 +36,69 @@ dependencies {
 	compile 'com.squareup.okhttp:okhttp:1.2.1'
     compile 'com.newrelic.agent.android:android-agent:3.239.0'
 	compile 'com.crashlytics.android:crashlytics:1.1.5'
-
 }
 
-/*
- * Gets the version name from the latest Git tag
- */
-def getVersionName = { ->
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'describe', '--tags'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
 }
 
-version = getVersionName()
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
 
 compileJava {
   sourceCompatibility = 1.6
   targetCompatibility = 1.6
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'android-gluten'
+                packaging 'jar'
+                description 'Glue code between popular android libraries'
+                url 'https://github.com/dpreussler/android-gluten'
+
+                scm {
+                    url 'scm:git@github.com:dpreussler/android-gluten.git'
+                    connection 'scm:git@github.com:dpreussler/android-gluten.git'
+                    developerConnection 'scm:git@github.com:dpreussler/android-gluten.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://github.com/dpreussler/android-gluten/blob/master/LICENSE'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'dpreussler'
+                        name 'Danny Preussler'
+                    }
+                }
+            }
+        }
+    }
 }
