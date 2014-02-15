@@ -128,7 +128,7 @@ public class FileLogger implements Logging {
 
     @Override
     public  String getStackTraceString(Throwable tr) {
-        return redirectLog.getStackTraceString(tr);
+        return android.util.Log.getStackTraceString(tr);
     }
     
     private void prepareInBackground() {
