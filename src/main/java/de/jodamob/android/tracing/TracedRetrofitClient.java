@@ -7,6 +7,7 @@ import retrofit.client.Header;
 import retrofit.client.Request;
 import retrofit.client.Response;
 
+// TODO this should be done via the Profiler API from Retrofit
 public class TracedRetrofitClient implements Client{
     
     private final Client client;
