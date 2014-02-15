@@ -3,6 +3,7 @@ package de.jodamob.android.tracing;
 import java.io.IOException;
 import com.newrelic.agent.android.NewRelic;
 
+@Deprecated
 public class NewRelicTracer implements Tracer {
 
     @Override

@@ -9,6 +9,7 @@ import com.squareup.picasso.Downloader;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.UrlConnectionDownloader;
 
+@Deprecated
 public class TracedPicassoDownloader implements Downloader {
 
     private final Downloader downloader;
