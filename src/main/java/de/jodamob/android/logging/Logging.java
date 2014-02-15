@@ -3,7 +3,7 @@ package de.jodamob.android.logging;
 /**
  * interface version of Android.util.Log methods
  */
-interface _Log {
+public interface Logging {
 
     int v(String tag, String message);
 

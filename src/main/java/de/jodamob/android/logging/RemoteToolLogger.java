@@ -1,16 +1,16 @@
 package de.jodamob.android.logging;
 
 
-public class RemoteToolLogger implements _Log {
+public class RemoteToolLogger implements Logging {
 
-    private final _Log redirectLog;
+    private final Logging redirectLog;
     private final RemoteReporter exceptionReporter;
 
     public RemoteToolLogger(RemoteReporter reporter) {
         this(reporter, new SilentLogger());
     }
     
-    public RemoteToolLogger(RemoteReporter reporter, _Log redirectLog) {
+    public RemoteToolLogger(RemoteReporter reporter, Logging redirectLog) {
         exceptionReporter = reporter;
         this.redirectLog = redirectLog; 
     }

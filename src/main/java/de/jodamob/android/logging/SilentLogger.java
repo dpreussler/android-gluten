@@ -4,7 +4,7 @@ package de.jodamob.android.logging;
  * this logger logs nothing:
  * enjoy the silence
  */
-public class SilentLogger implements _Log {
+public class SilentLogger implements Logging {
 
     public SilentLogger() {
     }

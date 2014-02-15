@@ -4,13 +4,13 @@ import java.io.File;
 import java.util.logging.Logger;
 import android.content.Context;
 
-public class FileLogger implements _Log {
+public class FileLogger implements Logging {
 
     static final String FOLDER_NAME = "logs";
     static final String FILE_PATTERN = "applog";
     static final String FILE_EXTENSION = ".log";
     
-    private final _Log redirectLog;
+    private final Logging redirectLog;
     private final FileLoggerPreparation fileCreator;
     private final Logger logger = Logger.getLogger("");
 
@@ -22,7 +22,7 @@ public class FileLogger implements _Log {
         return new FileLoggerCollector(context).getAsSingleLogfile();
     }
     
-    public FileLogger(final Context context, final _Log redirectLog) {
+    public FileLogger(final Context context, final Logging redirectLog) {
         this.fileCreator = new FileLoggerPreparation(context);
         this.redirectLog = redirectLog;
         prepareInBackground();

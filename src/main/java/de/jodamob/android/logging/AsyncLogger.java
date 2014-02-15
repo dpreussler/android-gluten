@@ -4,12 +4,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.content.Context;
 
-public class AsyncLogger implements _Log {
+public class AsyncLogger implements Logging {
 
-    private final _Log redirectLog;
+    private final Logging redirectLog;
     private final ExecutorService background;
 
-    public AsyncLogger(Context context, _Log redirectLog) {
+    public AsyncLogger(Context context, Logging redirectLog) {
         this.redirectLog = redirectLog;
         this.background = Executors.newSingleThreadExecutor();
     }

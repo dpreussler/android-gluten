@@ -1,15 +1,15 @@
 package de.jodamob.android.logging;
 
-public class LogCatLogger implements _Log {
+public class LogCatLogger implements Logging {
 
     private static final String TAG = "";
-    private final _Log redirectLog;
+    private final Logging redirectLog;
 
     public LogCatLogger() {
         this(new SilentLogger());
     }
 
-    public LogCatLogger(_Log redirectLog) {
+    public LogCatLogger(Logging redirectLog) {
         this.redirectLog = redirectLog;
     }
 

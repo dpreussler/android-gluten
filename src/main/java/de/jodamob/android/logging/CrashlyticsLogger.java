@@ -9,7 +9,7 @@ public class CrashlyticsLogger extends RemoteToolLogger {
         this(new SilentLogger());
     }
     
-    public CrashlyticsLogger(_Log redirectLogger) {
+    public CrashlyticsLogger(Logging redirectLogger) {
         super(new CrashlyticsRepoter(), redirectLogger);
     }
 

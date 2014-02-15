@@ -12,11 +12,11 @@ import android.content.Context;
 public class FileLoggerTest {
 
     FileLogger tested;
-    _Log logger;
+    Logging logger;
     
     @Before 
     public void setup() {
-        logger = mock(_Log.class);
+        logger = mock(Logging.class);
         tested = new FileLogger(mock(Context.class), logger);
     }
     

@@ -5,11 +5,11 @@ import java.lang.Thread.UncaughtExceptionHandler;
 /**
  * redirects logs plus writes uncaught exceptions as errors
  */
-public class UncaughtExceptionLogger implements _Log {
+public class UncaughtExceptionLogger implements Logging {
 
-    private final _Log redirectLog;
+    private final Logging redirectLog;
 
-    public UncaughtExceptionLogger(_Log redirectLog) {
+    public UncaughtExceptionLogger(Logging redirectLog) {
         this.redirectLog = redirectLog;
         registerAsExceptionHandler();
     }
@@ -114,9 +114,9 @@ public class UncaughtExceptionLogger implements _Log {
     private static class HandlerImplementation implements UncaughtExceptionHandler {
 
         private UncaughtExceptionHandler handler;
-        private _Log log;
+        private Logging log;
 
-        public HandlerImplementation(UncaughtExceptionHandler hdl, _Log log) {
+        public HandlerImplementation(UncaughtExceptionHandler hdl, Logging log) {
             this.handler = hdl;
             this.log = log;
         }

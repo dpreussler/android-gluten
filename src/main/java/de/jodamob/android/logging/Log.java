@@ -9,7 +9,7 @@ package de.jodamob.android.logging;
  */
 public final class Log {
 
-    private static _Log logger = new LogCatLogger();
+    private static Logging logger = new LogCatLogger();
     
     public static int v(String tag, String message) {
         return android.util.Log.v(tag, message);
@@ -83,7 +83,7 @@ public final class Log {
         return logger.getStackTraceString(tr);
     }
     
-    public static void initLogger(_Log log) {
+    public static void initLogger(Logging log) {
         logger = log != null ? log : new LogCatLogger(); 
     }
 }

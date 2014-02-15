@@ -10,7 +10,7 @@ public class NewRelicLogger extends RemoteToolLogger {
         this(new SilentLogger());
     }
     
-    public NewRelicLogger(_Log redirectLogger) {
+    public NewRelicLogger(Logging redirectLogger) {
         super(new NewRelicRepoter(), redirectLogger);
     }
 
