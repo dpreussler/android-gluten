@@ -4,6 +4,16 @@ android-gluten
 Gluten is what it all holds together.
 This is the glue code between popular android libraries. 
 
+Gradle
+======
+```
+dependencies {
+	compile 'de.jodamob.android:android-gluten:0.2-1-g01f4ba1'
+}
+```
+
+
+
 Espresso:
 =========
 Espresso is a testing library based on Android Instrumentation tests
