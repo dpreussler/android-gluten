@@ -4,6 +4,9 @@ android-gluten
 Gluten is what it all holds together.
 This is the glue code between popular android libraries. 
 
+
+![alt tag](http://jodamob.de/MTC%20Spring%20Speakerbutton%203.jpg)
+
 Gradle
 ======
 ```
