@@ -11,7 +11,7 @@ Gradle
 ======
 ```
 dependencies {
-	compile 'de.jodamob.android:android-gluten:0.2-1-g01f4ba1'
+	compile 'de.jodamob.android:android-gluten:0.2-4-g2b661b6'
 }
 ```
 
@@ -31,6 +31,27 @@ https://github.com/path/android-priority-jobqueue
 Usage:
 `Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(context)));`
 
+
+New Relic Tracer for Retrofit
+====================================
+New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache and is supposed to support OkHttp
+ since release 264 but seems to have some problems. So here are alternative trace implementations
+
+
+Usage:
+
+set a profiler when building the RestAdapter:
+
+```
+return new RestAdapter.Builder()
+            .setProfiler(new TracedRetrofitProfiler(new NewRelicTracer()));
+
+```
+
+
+https://github.com/square/retrofit
+https://docs.newrelic.com/docs/mobile-apps/android-api
+https://github.com/square/okhttp
 
 
 Just another logging framework
@@ -83,49 +104,6 @@ Or simply create the UberLog:
 ``` 
 
 
-New Relic implementations for OkHttp
-====================================
-New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache but not OkHttp
-REMARK: with latest new relic release 264 this is obsolete, will keep as reference
-
-https://docs.newrelic.com/docs/mobile-apps/android-api
-
-New Relic Trace for Retrofit
--------------------------------------------
-REMARK: with latest new relic release 264 this is obsolete, will keep as reference
-
-Usage: 
-instead of
-
-`new OkClient(new OkHttpClient()) `
-for the RestAdapter use:
-
-`new TracedRetrofitClient(new OkClient(new OkHttpClient()), new NewRelicTracer())`
-
-
-
-https://github.com/square/retrofit
-https://github.com/square/okhttp
-
-TODO: very basic for now, no load tracking
-
-New Relic Trace for Picasso
----------------------------
-REMARK: with latest new relic release 264 this is obsolete, will keep as reference
-
-Usage: 
-create your Picasso instance with something like this:
-
-```
-	new Picasso.Builder(context).downloader(
-		new TracedPicassoDownloader(new NewRelicTracer(), context)).build();
-```
-
-
-
-https://github.com/square/picasso
-
-TODO: very basic for now, no load tracking
 
 
 These source samples are licensed under MIT license
