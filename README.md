@@ -54,6 +54,24 @@ https://docs.newrelic.com/docs/mobile-apps/android-api
 https://github.com/square/okhttp
 
 
+AutoLayout
+==========
+Why glue together your Activity and Fragments with the xml file manually?
+Keep the names in sync and it will be done for you.
+
+Simple extend from:
+`AutoLayoutActivity
+`AutoLayoutFragment
+
+both will do setContentView in onCreate / inflateView in onCreateView based on their name using
+lowercase and underscores instead of CamelCase.
+
+So:
+'DashboardActivity
+must have a layout file
+'dashboard_activity.xml
+
+
 Just another logging framework
 ==============================
 multiple combinable logging classes.
