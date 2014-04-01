@@ -11,7 +11,7 @@ Gradle
 ======
 ```
 dependencies {
-	compile 'de.jodamob.android:android-gluten:0.2-4-g2b661b6'
+	compile 'de.jodamob.android:android-gluten:0.2-6-g39f6922'
 }
 ```
 
@@ -59,17 +59,19 @@ AutoLayout
 Why glue together your Activity and Fragments with the xml file manually?
 Keep the names in sync and it will be done for you.
 
-Simple extend from:
-`AutoLayoutActivity
-`AutoLayoutFragment
+Simple extend from one of:
+```
+AutoLayoutActivity
+AutoLayoutFragment
+```
 
 both will do setContentView in onCreate / inflateView in onCreateView based on their name using
 lowercase and underscores instead of CamelCase.
 
 So:
-'DashboardActivity
+`DashboardActivity`
 must have a layout file
-'dashboard_activity.xml
+`dashboard_activity.xml`
 
 
 Just another logging framework
