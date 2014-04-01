@@ -8,7 +8,6 @@ public class AutoLayoutActivity extends Activity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);       
-        new NameConverter();
         setContentView(NameConverter.convertToResourceId(this));
     }   
 }
