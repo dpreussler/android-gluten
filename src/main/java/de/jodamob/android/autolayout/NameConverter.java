@@ -6,25 +6,41 @@ import android.app.Fragment;
 import android.content.res.Resources;
 import android.os.Build;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import de.jodamob.android.logging.Log;
 
 public class NameConverter {
-    
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceId(Fragment fragment) {
-        return getStringResourceByName(convertToResourceName(fragment),
+        return getStringResourceByName(
                 fragment.getActivity().getPackageName(),
-                fragment.getResources());        
+                fragment.getResources(),
+                convertToResourceName(fragment));
     }
     
     public static int convertToResourceId(Activity activity) {
-        return getStringResourceByName(convertToResourceName(activity),
-                                       activity.getPackageName(),
-                                       activity.getResources());
+        return getStringResourceByName(
+                   activity.getPackageName(),
+                   activity.getResources(),
+                   convertToResourceName(activity));
     }
     
-    static String convertToResourceName(Object object) {
-        return asLayoutNameCharacters(getPureClassname(object));
+    static String[] convertToResourceName(Object object) {
+        String pureClassname = getPureClassname(object);
+        return asVariants(asLayoutNameCharacters(pureClassname));
+    }
+
+    private static String[] asVariants(String name) {
+        String[] parts = name.split("_");
+        List<String> fullnames = new ArrayList<String>(parts.length);
+        for(String part : parts) {
+            fullnames.add((fullnames.isEmpty() ? "" : fullnames.get(fullnames.size()-1) + "_") + part) ;
+        }
+        return fullnames.toArray(new String[fullnames.size()]);
     }
 
     private static String getPureClassname(Object object) {
@@ -49,11 +65,14 @@ public class NameConverter {
         }
     }
     
-    private static int getStringResourceByName(String resourceName, String packageName, Resources resources) {
-        int layout = resources.getIdentifier(resourceName, "layout", packageName);
-        if (layout == 0) {
-            Log.e("could not find "  +resourceName);
+    private static int getStringResourceByName(String packageName, Resources resources, String... resourceNames) {
+        for (String name : resourceNames) {
+            int layout = resources.getIdentifier(name, "layout", packageName);
+            if (layout > 0) {
+                return layout;
+            }
         }
-        return layout;
+        Log.e("could not find one of"  + Arrays.toString(resourceNames));
+        return 0;
     }
 }
