@@ -16,6 +16,30 @@ dependencies {
 ```
 
 
+AutoLayout
+==========
+Why glue together your Activity and Fragments with the xml file manually?
+Keep the names in sync and it will be done for you.
+
+Simple extend from one of:
+```
+AutoLayoutActivity
+AutoLayoutFragment
+AutoLayoutPreferenceFragment
+```
+
+both will do setContentView in onCreate / inflateView in onCreateView based on their name using
+lowercase and underscores instead of CamelCase.
+
+So:
+`DashboardStatisticsActivity`
+must have a layout file
+`dashboard_statistics_activity.xml`
+it also searches for
+`dashboard_statistics.xml`
+and
+`dashboard.xml`
+
 
 Espresso:
 =========
@@ -52,26 +76,6 @@ return new RestAdapter.Builder()
 https://github.com/square/retrofit
 https://docs.newrelic.com/docs/mobile-apps/android-api
 https://github.com/square/okhttp
-
-
-AutoLayout
-==========
-Why glue together your Activity and Fragments with the xml file manually?
-Keep the names in sync and it will be done for you.
-
-Simple extend from one of:
-```
-AutoLayoutActivity
-AutoLayoutFragment
-```
-
-both will do setContentView in onCreate / inflateView in onCreateView based on their name using
-lowercase and underscores instead of CamelCase.
-
-So:
-`DashboardActivity`
-must have a layout file
-`dashboard_activity.xml`
 
 
 Just another logging framework
