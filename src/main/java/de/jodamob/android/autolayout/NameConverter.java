@@ -5,25 +5,41 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Resources;
 import android.os.Build;
+import android.preference.PreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.jodamob.android.logging.Log;
 
 public class NameConverter {
 
+    private static final String TYPE_XML = "xml";
+    public static final String TYPE_LAYOUT = "layout";
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceId(Fragment fragment) {
         return getStringResourceByName(
+                TYPE_LAYOUT,
                 fragment.getActivity().getPackageName(),
                 fragment.getResources(),
                 convertToResourceName(fragment));
     }
-    
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static int convertToResourceId(PreferenceFragment fragment) {
+        return getStringResourceByName(
+                TYPE_XML,
+                fragment.getActivity().getPackageName(),
+                fragment.getResources(),
+                convertToResourceName(fragment));
+    }
+
     public static int convertToResourceId(Activity activity) {
         return getStringResourceByName(
+                TYPE_LAYOUT,
                    activity.getPackageName(),
                    activity.getResources(),
                    convertToResourceName(activity));
@@ -40,6 +56,7 @@ public class NameConverter {
         for(String part : parts) {
             fullnames.add((fullnames.isEmpty() ? "" : fullnames.get(fullnames.size()-1) + "_") + part) ;
         }
+        Collections.reverse(fullnames);
         return fullnames.toArray(new String[fullnames.size()]);
     }
 
@@ -65,9 +82,9 @@ public class NameConverter {
         }
     }
     
-    private static int getStringResourceByName(String packageName, Resources resources, String... resourceNames) {
+    private static int getStringResourceByName(String type, String packageName, Resources resources, String... resourceNames) {
         for (String name : resourceNames) {
-            int layout = resources.getIdentifier(name, "layout", packageName);
+            int layout = resources.getIdentifier(name, type, packageName);
             if (layout > 0) {
                 return layout;
             }
