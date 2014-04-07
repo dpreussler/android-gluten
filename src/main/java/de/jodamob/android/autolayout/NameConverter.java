@@ -16,13 +16,10 @@ import de.jodamob.android.logging.Log;
 
 public class NameConverter {
 
-    private static final String TYPE_XML = "xml";
-    public static final String TYPE_LAYOUT = "layout";
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceId(Fragment fragment) {
-        return getStringResourceByName(
-                TYPE_LAYOUT,
+        return DynamicResourceLoader.getStringResourceByName(
+                DynamicResourceLoader.TYPE_LAYOUT,
                 fragment.getActivity().getPackageName(),
                 fragment.getResources(),
                 convertToResourceName(fragment));
@@ -30,16 +27,16 @@ public class NameConverter {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceId(PreferenceFragment fragment) {
-        return getStringResourceByName(
-                TYPE_XML,
+        return DynamicResourceLoader.getStringResourceByName(
+                DynamicResourceLoader.TYPE_XML,
                 fragment.getActivity().getPackageName(),
                 fragment.getResources(),
                 convertToResourceName(fragment));
     }
 
     public static int convertToResourceId(Activity activity) {
-        return getStringResourceByName(
-                TYPE_LAYOUT,
+        return DynamicResourceLoader.getStringResourceByName(
+                DynamicResourceLoader.TYPE_LAYOUT,
                    activity.getPackageName(),
                    activity.getResources(),
                    convertToResourceName(activity));
@@ -80,16 +77,5 @@ public class NameConverter {
         } else {
             return "" + ch;
         }
-    }
-    
-    private static int getStringResourceByName(String type, String packageName, Resources resources, String... resourceNames) {
-        for (String name : resourceNames) {
-            int layout = resources.getIdentifier(name, type, packageName);
-            if (layout > 0) {
-                return layout;
-            }
-        }
-        Log.e("could not find one of"  + Arrays.toString(resourceNames));
-        return 0;
     }
 }

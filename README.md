@@ -11,7 +11,7 @@ Gradle
 ======
 ```
 dependencies {
-	compile 'de.jodamob.android:android-gluten:0.2-6-g39f6922'
+	compile 'de.jodamob.android:android-gluten:0.2-11-g787ca31'
 }
 ```
 
