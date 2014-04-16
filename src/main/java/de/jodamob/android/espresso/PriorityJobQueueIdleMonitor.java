@@ -6,10 +6,9 @@ import com.path.android.jobqueue.JobManager;
 
 public class PriorityJobQueueIdleMonitor implements IdlingResource {
     
-    private static final int LOW_PRIORITY = 0;
-    private final JobManager queue;
-    
-    public PriorityJobQueueIdleMonitor(JobManager queue) {
+    private final ProfiledJobManager queue;
+
+    public PriorityJobQueueIdleMonitor(ProfiledJobManager queue) {
         this.queue = queue;
     }
 
@@ -25,51 +24,11 @@ public class PriorityJobQueueIdleMonitor implements IdlingResource {
 
     @Override
     public void registerIdleTransitionCallback(final ResourceCallback callback) {
-        if (!isIdleNow()) {
-            addIdleWatcherJob(callback);
-        }
-    }
-
-    private long addIdleWatcherJob(final ResourceCallback callback) {
-        return queue.addJob(LOW_PRIORITY, new IdleCheckJob(true, callback));
-    }
-
-    private final class IdleCheckJob extends BaseJob {
-        
-        private final ResourceCallback callback;
-        private static final long serialVersionUID = -7531425496860713384L;
-    
-        private IdleCheckJob(boolean requiresNetwork, ResourceCallback callback) {
-            super(requiresNetwork);
-            this.callback = callback;
-        }
-    
-        @Override
-        public void onAdded() {
-        }
-    
-        @Override
-        protected void onCancel() {
-            notifyOrReAdd(callback);
-        }
-    
-        @Override
-        public void onRun() throws Throwable {
-            notifyOrReAdd(callback);
-        }
-    
-        private void notifyOrReAdd(final ResourceCallback callback) {
-            if (!isIdleNow()) {
-                addIdleWatcherJob(callback);  // re-add us
-            } else {
+        queue.registerNotifier(new QueueNotifier() {
+            @Override
+            public void onQueueEmpty() {
                 callback.onTransitionToIdle();
             }
-        }
-    
-        @Override
-        protected boolean shouldReRunOnThrowable(Throwable arg0) {
-            return false;
-        }
+        });
     }
-
 }
