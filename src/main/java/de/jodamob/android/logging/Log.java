@@ -83,6 +83,10 @@ public final class Log {
         return logger.wtf(tr);
     }
 
+    public static int logStackTrace(String message) {
+        return logger.logStackTrace(message);
+    }
+
     public static String getStackTraceString(Throwable tr) {
         return logger.getStackTraceString(tr);
     }
