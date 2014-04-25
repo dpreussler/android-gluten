@@ -2,15 +2,13 @@ package de.jodamob.android.logging;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import android.content.Context;
 
-public class AsyncLogger implements Logging {
+public class AsyncLogger extends RedirectedLogging {
 
-    private final Logging redirectLog;
     private final ExecutorService background;
 
-    public AsyncLogger(Context context, Logging redirectLog) {
-        this.redirectLog = redirectLog;
+    public AsyncLogger(Logging redirectLog) {
+        super(redirectLog);
         this.background = Executors.newSingleThreadExecutor();
     }
 
@@ -20,7 +18,7 @@ public class AsyncLogger implements Logging {
             
             @Override
             public void run() {
-                redirectLog.v(tag, message);
+                AsyncLogger.super.v(tag, message);
             }
         });
         return 0;
@@ -31,7 +29,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.v(tag, message, tr);
+                AsyncLogger.super.v(tag, message, tr);
             }
         });
         return 0;
@@ -42,7 +40,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.d(tag, message);
+                AsyncLogger.super.d(tag, message);
             }
         });
         return 0;
@@ -53,7 +51,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.d(tag, message, tr);
+                AsyncLogger.super.d(tag, message, tr);
             }
         });
         return 0;
@@ -65,7 +63,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.i(tag, message);
+                AsyncLogger.super.i(tag, message);
             }
         });
         return 0;
@@ -76,7 +74,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.i(tag, message, tr);
+                AsyncLogger.super.i(tag, message, tr);
             }
         });
         return 0;
@@ -87,7 +85,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.w(tag, message);
+                AsyncLogger.super.w(tag, message);
             }
         });
         return 0;
@@ -98,7 +96,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.w(tag, message, tr);
+                AsyncLogger.super.w(tag, message, tr);
             }
         });
         return 0;
@@ -109,7 +107,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.w(tag, tr);
+                AsyncLogger.super.w(tag, tr);
             }
         });
         return 0;
@@ -120,7 +118,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.e(tag, message);
+                AsyncLogger.super.e(tag, message);
             }
         });
         return 0;
@@ -131,7 +129,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.e(tag, message, tr);
+                AsyncLogger.super.e(tag, message, tr);
             }
         });
         return 0;
@@ -142,7 +140,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.e(message);
+                AsyncLogger.super.e(message);
             }
         });
         return 0;
@@ -153,7 +151,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.e(msg, tr);
+                AsyncLogger.super.e(msg, tr);
             }
         });
         return 0;
@@ -164,7 +162,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.wtf(tag, message, tr);
+                AsyncLogger.super.wtf(tag, message, tr);
             }
         });
         return 0;
@@ -175,7 +173,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.wtf(tag, tr);
+                AsyncLogger.super.wtf(tag, tr);
             }
         });
         return 0;
@@ -186,7 +184,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.wtf(tag, message);
+                AsyncLogger.super.wtf(tag, message);
             }
         });
         return 0;
@@ -197,7 +195,7 @@ public class AsyncLogger implements Logging {
         background.execute(new Runnable() {
             @Override
             public void run() {
-                redirectLog.wtf(tr);
+                AsyncLogger.super.wtf(tr);
             }
         });
         return 0;
@@ -205,6 +203,6 @@ public class AsyncLogger implements Logging {
 
     @Override
     public  String getStackTraceString(Throwable tr) {
-        return redirectLog.getStackTraceString(tr);
+        return AsyncLogger.super.getStackTraceString(tr);
     }
 }
