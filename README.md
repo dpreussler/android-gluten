@@ -11,7 +11,7 @@ Gradle
 ======
 ```
 dependencies {
-	compile 'de.jodamob.android:android-gluten:0.2-11-g787ca31'
+	compile 'de.jodamob.android:android-gluten:0.2-16-gfbf52e4'
 }
 ```
 
@@ -39,6 +39,8 @@ it also searches for
 `dashboard_statistics.xml`
 and
 `dashboard.xml`
+
+They also try to inflate the menu based on same names in menu folders!
 
 
 Espresso:
@@ -109,7 +111,7 @@ example:
 
 `Log.initLogger(new FileLogger(context, new LogCatLogger()))` writes to files + console
 
-`Log.initLogger(new UncaughtExceptionLogger(new FileLogger(context)))` writes logs and uncaught crashes to file 
+`Log.initLogger(new UncaughtExceptionLogger(new FileLogger(context)))` writes logs and uncaught crashes to file
 
 `Log.initLogger(new AsyncLogger(new FileLogger(new CrashlyticsLogger(new LogCatLogger()))));` writes async to file and crashlytics and logcat
 
@@ -123,7 +125,7 @@ Or simply create the UberLog:
                         new CrashlyticsLogger(
                                 new LogCatLogger(
                                         new UncaughtExceptionLogger(
-                                                new AsyncLogger(context, 
+                                                new AsyncLogger(
                                                         new FileLogger(context)))))));
 ``` 
 
