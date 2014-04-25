@@ -10,9 +10,19 @@ This is the glue code between popular android libraries.
 Gradle
 ======
 ```
-dependencies {
-	compile 'de.jodamob.android:android-gluten:0.2-16-gfbf52e4'
+
+compile ('de.jodamob.android:android-gluten:0.2-16-gfbf52e4') {
+    // exclude some dependencies because it was build as java not android project
+        exclude group: 'org.robolectric'
 }
+
+```
+or grab from build folder and put in your libs:
+
+```
+
+compile files('libs/android-gluten-0.2-16-gfbf52e4.jar')
+
 ```
 
 
