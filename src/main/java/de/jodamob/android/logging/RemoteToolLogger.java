@@ -1,9 +1,8 @@
 package de.jodamob.android.logging;
 
 
-public class RemoteToolLogger implements Logging {
+public class RemoteToolLogger extends RedirectedLogging {
 
-    private final Logging redirectLog;
     private final RemoteReporter exceptionReporter;
 
     public RemoteToolLogger(RemoteReporter reporter) {
@@ -11,106 +10,117 @@ public class RemoteToolLogger implements Logging {
     }
     
     public RemoteToolLogger(RemoteReporter reporter, Logging redirectLog) {
+        super(redirectLog);
         exceptionReporter = reporter;
-        this.redirectLog = redirectLog; 
     }
 
     @Override
     public  int v(String tag, String message) {
-        return redirectLog.v(tag, message);
+        return super.v(tag, message);
     }
 
     @Override
     public  int v(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(message, tr);
-        return redirectLog.v(tag, message, tr);
+        return super.v(tag, message, tr);
     }
 
     @Override
     public  int d(String tag, String message) {
-        return redirectLog.d(tag, message);
+        return super.d(tag, message);
     }
 
     @Override
     public  int d(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(message, tr);
-        return redirectLog.d(tag, message, tr);
+        return super.d(tag, message, tr);
     }
 
     @Override
     public  int i(String tag, String message) {
-        return redirectLog.i(tag, message);
+        return super.i(tag, message);
     }
 
     @Override
     public  int i(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(message, tr);
-        return redirectLog.i(tag, message, tr);
+        return super.i(tag, message, tr);
     }
 
     @Override
     public  int w(String tag, String message) {
-        return redirectLog.w(tag, message);
+        return super.w(tag, message);
     }
 
     @Override
     public  int w(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(message, tr);
-        return redirectLog.w(tag, message, tr);
+        return super.w(tag, message, tr);
     }
 
     @Override
     public  int w(String tag, Throwable tr) {
-        return redirectLog.w(tag, tr);
+        return super.w(tag, tr);
     }
 
     @Override
     public  int e(String tag, String message) {
-        return redirectLog.e(tag, message);
+        return super.e(tag, message);
     }
 
     @Override
     public  int e(String tag, String message, Throwable tr) {
         exceptionReporter.reportLoggedException(message, tr);
-        return redirectLog.e(tag, message, tr);
+        return super.e(tag, message, tr);
     }
 
     @Override
     public  int e(String message) {
-        return redirectLog.e(message);
+        return super.e(message);
     }
 
     @Override
     public  int e(String msg, Throwable tr) {
         exceptionReporter.reportLoggedException(msg, tr);
-        return redirectLog.e(msg, tr);
+        return super.e(msg, tr);
+    }
+
+    @Override
+    public int e(Throwable tr) {
+        return super.e(tr);
     }
 
     @Override
     public  int wtf(String tag, String message, Throwable tr) {
         exceptionReporter.reportWtfException(tr);
-        return redirectLog.wtf(tag, message, tr);
+        return super.wtf(tag, message, tr);
     }
 
     @Override
     public  int wtf(String tag, Throwable tr) {
         exceptionReporter.reportWtfException(tr);
-        return redirectLog.wtf(tag, tr);
+        return super.wtf(tag, tr);
     }
 
     @Override
     public  int wtf(String tag, String message) {
-        return redirectLog.wtf(tag, message);
+        return super.wtf(tag, message);
     }
 
     @Override
     public  int wtf(Throwable tr) {
         exceptionReporter.reportWtfException(tr);
-        return redirectLog.wtf(tr);
+        return super.wtf(tr);
+    }
+
+    @Override
+    public int logStackTrace(String message) {
+        exceptionReporter.reportLoggedException(message, new Throwable().fillInStackTrace());
+        return super.logStackTrace(message);
     }
 
     @Override
     public  String getStackTraceString(Throwable tr) {
-        return redirectLog.getStackTraceString(tr);
+        return super.getStackTraceString(tr);
     }
 }

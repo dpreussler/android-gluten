@@ -95,7 +95,17 @@ public class SilentLogger implements Logging {
     }
 
     @Override
+    public int logStackTrace(String message) {
+        return 0;
+    }
+
+    @Override
     public String getStackTraceString(Throwable tr) {
-        return null;
+        return "";
+    }
+
+    @Override
+    public int e(Throwable tr) {
+        return 0;
     }
 }

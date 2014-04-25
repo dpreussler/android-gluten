@@ -17,7 +17,16 @@ import de.jodamob.android.logging.Log;
 public class NameConverter {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static int convertToResourceId(Fragment fragment) {
+    public static int convertToResourceMenuId(Fragment fragment) {
+        return DynamicResourceLoader.getStringResourceByName(
+                DynamicResourceLoader.TYPE_MENU,
+                fragment.getActivity().getPackageName(),
+                fragment.getResources(),
+                convertToResourceName(fragment));
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static int convertToResourceLayoutId(Fragment fragment) {
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_LAYOUT,
                 fragment.getActivity().getPackageName(),
@@ -26,7 +35,7 @@ public class NameConverter {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static int convertToResourceId(PreferenceFragment fragment) {
+    public static int convertToResourceXmlId(PreferenceFragment fragment) {
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_XML,
                 fragment.getActivity().getPackageName(),
@@ -34,12 +43,20 @@ public class NameConverter {
                 convertToResourceName(fragment));
     }
 
-    public static int convertToResourceId(Activity activity) {
+    public static int convertToResourceLayoutId(Activity activity) {
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_LAYOUT,
                    activity.getPackageName(),
                    activity.getResources(),
                    convertToResourceName(activity));
+    }
+
+    public static int convertToResourceMenuId(Activity activity) {
+        return DynamicResourceLoader.getStringResourceByName(
+                DynamicResourceLoader.TYPE_MENU,
+                activity.getPackageName(),
+                activity.getResources(),
+                convertToResourceName(activity));
     }
     
     static String[] convertToResourceName(Object object) {

@@ -39,6 +39,9 @@ public interface Logging {
 
     int wtf(Throwable tr);
 
+    int logStackTrace(String message);
+
     String getStackTraceString(Throwable tr);
 
+    int e(Throwable tr);
 }

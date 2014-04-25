@@ -59,7 +59,11 @@ public final class Log {
         return logger.e(message);
     }
 
-    public static int e(String msg, Exception tr) {
+    public static int e(Throwable tr) {
+        return logger.e(tr);
+    }
+
+    public static int e(String msg, Throwable tr) {
         return logger.e(msg, tr);
     }
 

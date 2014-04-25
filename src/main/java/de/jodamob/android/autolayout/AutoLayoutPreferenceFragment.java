@@ -10,6 +10,6 @@ public class AutoLayoutPreferenceFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(NameConverter.convertToResourceId(this));
+        addPreferencesFromResource(NameConverter.convertToResourceXmlId(this));
     }
 }
