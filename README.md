@@ -144,22 +144,6 @@ https://github.com/square/okhttp
 
 
 
-Espresso:
-=========
-Espresso is a testing library based on Android Instrumentation tests
-https://code.google.com/p/android-test-kit/wiki/Espresso
-
-Before checking assertions Espresso waits to let app be idle. Therefore it checks the mainlooper and AsyncTasks default-executor. But custom threads and threadpools must be registerd as "IdleResource" to be monitored.
-
-IdleResource for Android Priority-JobQueue
-------------------------------------------------------------------
-https://github.com/path/android-priority-jobqueue
-
-Usage:
-`Espresso.registerIdlingResources(new PriorityJobQueueIdleMonitor(new JobManager(context)));`
-
-
-
 Licensed under MIT license
 (c) 2014 Danny Preussler
 

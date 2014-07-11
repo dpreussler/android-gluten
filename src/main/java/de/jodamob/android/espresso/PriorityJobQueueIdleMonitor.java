@@ -4,6 +4,7 @@ import com.google.android.apps.common.testing.ui.espresso.IdlingResource;
 import com.path.android.jobqueue.BaseJob;
 import com.path.android.jobqueue.JobManager;
 
+@Deprecated
 public class PriorityJobQueueIdleMonitor implements IdlingResource {
     
     private static final int LOW_PRIORITY = 0;
