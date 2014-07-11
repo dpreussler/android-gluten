@@ -12,6 +12,7 @@ public class DynamicResourceLoader {
     public static final String TYPE_STRING = "string";
     public static final String TYPE_LAYOUT = "layout";
     public static final String TYPE_MENU = "menu";
+    public static final String TYPE_DRAWABLE = "drawable";
 
     public static int getStringResourceByName(String type, String packageName, Resources resources, String... resourceNames) {
         for (String name : resourceNames) {
