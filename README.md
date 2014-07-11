@@ -52,28 +52,20 @@ and
 
 They also try to inflate the menu based on same names in menu folders!
 
-
-
-New Relic Tracer for Retrofit
-====================================
-New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache and is supposed to support OkHttp
- since release 264 but seems to have some problems. So here are alternative trace implementations
-
+SafePhrase
+==========
+Runtime safe version of the Phrase class
 
 Usage:
+Same as Phrase:
 
-set a profiler when building the RestAdapter:
+'SafePhrase.from(...).put(...).format()'
 
-```
-return new RestAdapter.Builder()
-            .setProfiler(new TracedRetrofitProfiler(new NewRelicTracer()));
-
-```
+Will not crash if elements are not found. Will do a wtf log instead (when combined with Crashlytics
+logger this would still send the stacktrace so you can fix it easily with next version).
 
 
-https://github.com/square/retrofit
-https://docs.newrelic.com/docs/mobile-apps/android-api
-https://github.com/square/okhttp
+https://github.com/square/phrase
 
 
 Just another logging framework
@@ -129,6 +121,29 @@ Or simply create the UberLog:
 
 
 
+New Relic Tracer for Retrofit
+====================================
+New Relic is an app monitoring tool. It can log HTTP results for HttpUrlConnection and Apache and is supposed to support OkHttp
+ since release 264 but seems to have some problems. So here are alternative trace implementations
+
+
+Usage:
+
+set a profiler when building the RestAdapter:
+
+```
+return new RestAdapter.Builder()
+            .setProfiler(new TracedRetrofitProfiler(new NewRelicTracer()));
+
+```
+
+
+https://github.com/square/retrofit
+https://docs.newrelic.com/docs/mobile-apps/android-api
+https://github.com/square/okhttp
+
+
+
 Espresso:
 =========
 Espresso is a testing library based on Android Instrumentation tests
@@ -147,3 +162,11 @@ Usage:
 
 Licensed under MIT license
 (c) 2014 Danny Preussler
+
+This software binds to other software, please acknowledge those copyrights
+or make sure to exclude them at compile time:
+Espresso and Android Copyright Google Inc.
+OkHTTP, Picasso, Phrase Copyright Square, Inc.
+Crashlytics, Copyright Crashlytics
+New Relic, Copyright New Relic, Inc.
+

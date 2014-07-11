@@ -1,8 +1,10 @@
 package de.jodamob.android.phrase;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
+import android.view.View;
 
 import com.squareup.phrase.Phrase;
 
@@ -20,12 +22,20 @@ public class SafePhrase {
         return new SafePhrase(Phrase.from(sequence));
     }
 
+    public static SafePhrase from(Context context, int resourceId) {
+        return new SafePhrase(Phrase.from(context, resourceId));
+    }
+
+    public static SafePhrase from(View view, int resourceId) {
+        return new SafePhrase(Phrase.from(view, resourceId));
+    }
+
     public static SafePhrase from(Resources resources, int resourceId) {
         return new SafePhrase(Phrase.from(resources, resourceId));
     }
 
-    public static SafePhrase from(Activity activity, int resourceId) {
-        return new SafePhrase(Phrase.from(activity, resourceId));
+    public static SafePhrase from(Fragment fragment, int resourceId) {
+        return new SafePhrase(Phrase.from(fragment, resourceId));
     }
 
     public SafePhrase put(String key, String value) {
