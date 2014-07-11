@@ -11,7 +11,7 @@ Gradle
 ======
 ```
 
-compile ('de.jodamob.android:android-gluten:0.2-16-gfbf52e4') {
+compile ('de.jodamob.android:android-gluten:0.3-3-g89a07a5') {
     // exclude some dependencies because it was build as java not android project
         exclude group: 'org.robolectric'
 }
