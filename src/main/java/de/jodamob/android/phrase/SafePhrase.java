@@ -48,6 +48,11 @@ public class SafePhrase {
     }
 
     public CharSequence format() {
-        return phrase.format();
+        try {
+            return phrase.format();
+        } catch(IllegalArgumentException e) {
+            Log.wtf(e.getMessage(), e);
+        }
+        return phrase.toString();
     }
 }
