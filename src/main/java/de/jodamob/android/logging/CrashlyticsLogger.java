@@ -17,12 +17,17 @@ public class CrashlyticsLogger extends RemoteToolLogger {
         
         @Override
         public void reportLoggedException(String message, Throwable tr) {
-            Crashlytics.log(message);
-            Crashlytics.logException(tr);
+            // do nothing
         }
     
         @Override
         public void reportWtfException(Throwable tr) {
+            Crashlytics.logException(tr);
+        }
+
+        @Override
+        public void reportWtfException(String message, Throwable tr) {
+            Crashlytics.log(message);
             Crashlytics.logException(tr);
         }
     }

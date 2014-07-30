@@ -36,5 +36,11 @@ public class NewRelicLogger extends RemoteToolLogger {
             long time = new Date().getTime();
             NewRelic.noticeNetworkFailure("http://WTF", time, time, new Exception(tr));
         }
+
+        @Override
+        public void reportWtfException(String message, Throwable tr) {
+            long time = new Date().getTime();
+            NewRelic.noticeNetworkFailure("http://WTF", time, time, new Exception(message, tr));
+        }
     }
 }
