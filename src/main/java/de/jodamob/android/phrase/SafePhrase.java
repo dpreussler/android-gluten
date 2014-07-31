@@ -12,6 +12,7 @@ import java.util.Locale;
 
 public class SafePhrase {
 
+    private static final SafePhrase DEFAULT = new SafePhrase(Phrase.from(""));
     private Phrase phrase;
 
     public SafePhrase(Phrase phrase) {
@@ -23,19 +24,39 @@ public class SafePhrase {
     }
 
     public static SafePhrase from(Context context, int resourceId) {
-        return new SafePhrase(Phrase.from(context, resourceId));
+        try {
+           return new SafePhrase(Phrase.from(context, resourceId));
+        } catch(IllegalArgumentException e) {
+            Log.wtf("invalid id " + resourceId, e);
+        }
+        return DEFAULT;
     }
 
     public static SafePhrase from(View view, int resourceId) {
-        return new SafePhrase(Phrase.from(view, resourceId));
+        try {
+           return new SafePhrase(Phrase.from(view, resourceId));
+        } catch(IllegalArgumentException e) {
+            Log.wtf("invalid id " + resourceId, e);
+        }
+        return DEFAULT;
     }
 
     public static SafePhrase from(Resources resources, int resourceId) {
-        return new SafePhrase(Phrase.from(resources, resourceId));
+        try {
+            return new SafePhrase(Phrase.from(resources, resourceId));
+        } catch(IllegalArgumentException e) {
+            Log.wtf("invalid id " + resourceId, e);
+        }
+        return DEFAULT;
     }
 
     public static SafePhrase from(Fragment fragment, int resourceId) {
-        return new SafePhrase(Phrase.from(fragment, resourceId));
+        try {
+            return new SafePhrase(Phrase.from(fragment, resourceId));
+        } catch(IllegalArgumentException e) {
+            Log.wtf("invalid id " + resourceId, e);
+        }
+        return new SafePhrase(Phrase.from(""));
     }
 
     public SafePhrase put(String key, String value) {
