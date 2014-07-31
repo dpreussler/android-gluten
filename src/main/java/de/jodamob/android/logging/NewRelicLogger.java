@@ -13,10 +13,10 @@ public class NewRelicLogger extends RemoteToolLogger {
     }
     
     public NewRelicLogger(Logging redirectLogger) {
-        super(new NewRelicRepoter(), redirectLogger);
+        super(new NewRelicReporter(), redirectLogger);
     }
 
-    private static final class NewRelicRepoter implements RemoteReporter {
+    private static final class NewRelicReporter implements RemoteReporter {
         
         @Override
         public void reportLoggedException(String message, Throwable tr) {
