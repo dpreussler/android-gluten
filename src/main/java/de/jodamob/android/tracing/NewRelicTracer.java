@@ -15,4 +15,9 @@ public class NewRelicTracer implements Tracer {
         NewRelic.noticeHttpTransaction(url, statusCode, startTime, endTime, bytesSent, bytesReceived);
     }
 
+    @Override
+    public void trace(String url, int statusCode, long startTime, long endTime, long bytesSent, long bytesReceived, String response) {
+        NewRelic.noticeHttpTransaction(url, statusCode, startTime, endTime, bytesSent, bytesReceived, response);
+    }
+
 }
