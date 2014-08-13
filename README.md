@@ -135,10 +135,39 @@ return new RestAdapter.Builder()
 
 ```
 
+if you also want the body (on erorrs only) be logged to NewRelic
+you have to use wrap the client, the profiler does not work:
+
+```
+return new RestAdapter.Builder()
+            .setClient(new TracedRetrofitClient(
+                    new OkHttpClient(), // or whatever you use
+                    new NewRelicTracer()));
+
+```
+
 
 https://github.com/square/retrofit
 https://docs.newrelic.com/docs/mobile-apps/android-api
 https://github.com/square/okhttp
+
+
+
+Small helpers
+====================================
+
+check out helper classes
+```
+StreamUtils.copy(inputstream, outputstream)
+
+Closeables.closeQuietly(stream1, stream2,...)
+
+ViewUtils.hideView(view1, view2,..)
+ViewUtils.showView(view1, view2,..)
+ViewUtils.removeView(view1, view2,..)
+ViewUtils.showOrHide(condition, view1, view2...)
+ViewUtils.showOrRemove(condition, view1, view2...)
+```
 
 
 

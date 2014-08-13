@@ -5,6 +5,12 @@ import de.jodamob.android.logging.Log;
 
 public final class Closeables {
 
+    public static void closeQuietly(final Closeable... closeables) {
+        for(Closeable closeable : closeables) {
+            closeQuietly(closeable);
+        }
+    }
+
     public static void closeQuietly(final Closeable closeable) {
         if (closeable == null) {
             return;
