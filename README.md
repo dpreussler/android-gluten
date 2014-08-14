@@ -50,6 +50,23 @@ and
 
 They also try to inflate the menu based on same names in menu folders!
 
+
+If this is too dangerous for you because of changing names, you could also:
+Just annotate your class:
+
+```
+@InjectedLayout(R.id.myLayout)
+public class MyActivity extends AutoLayoutActivity
+```
+
+or with fragment:
+
+```
+@InjectedLayout(R.id.myLayout)
+public class MyFragment extends AutoLayoutFragment
+```
+
+
 SafePhrase
 ==========
 Runtime safe version of the Phrase class

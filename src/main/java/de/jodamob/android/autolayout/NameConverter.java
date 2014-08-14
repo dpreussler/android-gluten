@@ -1,22 +1,15 @@
 package de.jodamob.android.autolayout;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.res.Resources;
-import android.os.Build;
 import android.preference.PreferenceFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import de.jodamob.android.logging.Log;
-
 public class NameConverter {
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceMenuId(Fragment fragment) {
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_MENU,
@@ -25,8 +18,11 @@ public class NameConverter {
                 convertToResourceName(fragment));
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceLayoutId(Fragment fragment) {
+        Class<?> aClass = fragment.getClass();
+        if (aClass.isAnnotationPresent(InjectLayout.class)) {
+            return aClass.getAnnotation(InjectLayout.class).value();
+        }
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_LAYOUT,
                 fragment.getActivity().getPackageName(),
@@ -34,7 +30,6 @@ public class NameConverter {
                 convertToResourceName(fragment));
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int convertToResourceXmlId(PreferenceFragment fragment) {
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_XML,
@@ -44,6 +39,10 @@ public class NameConverter {
     }
 
     public static int convertToResourceLayoutId(Activity activity) {
+        Class<?> aClass = activity.getClass();
+        if (aClass.isAnnotationPresent(InjectLayout.class)) {
+            return aClass.getAnnotation(InjectLayout.class).value();
+        }
         return DynamicResourceLoader.getStringResourceByName(
                 DynamicResourceLoader.TYPE_LAYOUT,
                    activity.getPackageName(),
