@@ -92,7 +92,7 @@ public class RemoteToolLogger extends RedirectedLogging {
 
     @Override
     public  int wtf(String tag, String message, Throwable tr) {
-        exceptionReporter.reportWtfException(tr);
+        exceptionReporter.reportWtfException(tag + message, tr);
         return super.wtf(tag, message, tr);
     }
 
