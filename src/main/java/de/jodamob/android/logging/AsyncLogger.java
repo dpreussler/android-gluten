@@ -1,7 +1,5 @@
 package de.jodamob.android.logging;
 
-import com.android.org.chromium.com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,8 +9,7 @@ public class AsyncLogger extends RedirectedLogging {
 
     public AsyncLogger(Logging redirectLog) {
         super(redirectLog);
-        this.background = Executors.newSingleThreadExecutor(new ThreadFactoryBuilder()
-                .setNameFormat("logger-thread-%d").build());
+        this.background = Executors.newSingleThreadExecutor();
     }
 
     @Override
