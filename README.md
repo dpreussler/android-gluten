@@ -2,25 +2,23 @@ android-gluten
 ==============
 
 Gluten is what it all holds together.
-This is the glue code between popular android libraries. 
+This is the glue code between popular android libraries.
 
 
 Gradle
 ======
-```
 
+```groovy
 compile ('de.jodamob.android:android-gluten:0.3-3-g89a07a5') {
     // exclude some dependencies because it was build as java not android project
         exclude group: 'org.robolectric'
 }
-
 ```
+
 or grab from build folder and put in your libs:
 
-```
-
+```groovy
 compile files('libs/android-gluten-0.2-16-gfbf52e4.jar')
-
 ```
 
 
@@ -30,7 +28,8 @@ Why glue together your Activity and Fragments with the xml file manually?
 Keep the names in sync and it will be done for you.
 
 Simple extend from one of:
-```
+
+```java
 AutoLayoutActivity
 AutoLayoutFragment
 AutoLayoutPreferenceFragment
@@ -54,14 +53,14 @@ They also try to inflate the menu based on same names in menu folders!
 If this is too dangerous for you because of changing names, you could also:
 Just annotate your class:
 
-```
+```java
 @InjectedLayout(R.id.myLayout)
 public class MyActivity extends AutoLayoutActivity
 ```
 
 or with fragment:
 
-```
+```java
 @InjectedLayout(R.id.myLayout)
 public class MyFragment extends AutoLayoutFragment
 ```
@@ -74,7 +73,9 @@ Runtime safe version of the Phrase class
 Usage:
 Same as Phrase:
 
-'SafePhrase.from(...).put(...).format()'
+```java
+SafePhrase.from(...).put(...).format()
+```
 
 Will not crash if elements are not found. Will do a wtf log instead (when combined with Crashlytics
 logger this would still send the stacktrace so you can fix it easily with next version).
@@ -122,15 +123,15 @@ example:
 
 Or simply create the UberLog:
 
+```java
+Log.initLogger(
+            new NewRelicLogger(
+                    new CrashlyticsLogger(
+                            new LogCatLogger(
+                                    new UncaughtExceptionLogger(
+                                            new AsyncLogger(
+                                                    new FileLogger(context)))))));
 ```
-	Log.initLogger(
-                new NewRelicLogger(
-                        new CrashlyticsLogger(
-                                new LogCatLogger(
-                                        new UncaughtExceptionLogger(
-                                                new AsyncLogger(
-                                                        new FileLogger(context)))))));
-``` 
 
 
 
@@ -146,21 +147,19 @@ Usage:
 
 set a profiler when building the RestAdapter:
 
-```
+```java
 return new RestAdapter.Builder()
             .setProfiler(new TracedRetrofitProfiler(new NewRelicTracer()));
-
 ```
 
 if you also want the body (on erorrs only) be logged to NewRelic
 you have to use wrap the client, the profiler does not work:
 
-```
+```java
 return new RestAdapter.Builder()
             .setClient(new TracedRetrofitClient(
                     new OkHttpClient(), // or whatever you use
                     new NewRelicTracer()));
-
 ```
 
 
@@ -174,7 +173,8 @@ Small helpers
 ====================================
 
 check out helper classes
-```
+
+```java
 StreamUtils.copy(inputstream, outputstream)
 
 Closeables.closeQuietly(stream1, stream2,...)
