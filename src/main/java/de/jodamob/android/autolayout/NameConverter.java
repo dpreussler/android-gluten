@@ -79,19 +79,28 @@ public class NameConverter {
     }
 
     private static String asLayoutNameCharacters(String name) {
-        String res = "" +Character.toLowerCase(name.charAt(0));
-        for(int i = 1; i < name.length(); i++) {
-           res += asLayoutNameCharacter(name, res, i);
+        return asLayoutNameCharacters(name, new StringBuilder(name.length() *1/3)).toString();
+    }
+
+    private static StringBuilder asLayoutNameCharacters(String name,  StringBuilder res) {
+        return asLayoutNameCharacters(name.toCharArray(), res);
+    }
+
+    private static StringBuilder asLayoutNameCharacters(char[] name, StringBuilder res) {
+        res.append(Character.toLowerCase(name[0]));
+        for(int i = 1; i < name.length; i++) {
+           addAsLayoutNameCharacter(name[i], res, i);
         }
         return res;
     }
 
-    private static String asLayoutNameCharacter(String name, String res, int i) {
-        Character ch = name.charAt(i);
+    private static StringBuilder addAsLayoutNameCharacter(char ch, StringBuilder res, int i) {
         if(Character.isUpperCase(ch) && i>0) {
-            return "_" + Character.toLowerCase(ch);
+            res.append("_");
+            res.append(Character.toLowerCase(ch));
         } else {
-            return "" + ch;
+            res.append(ch);
         }
+        return res;
     }
 }
