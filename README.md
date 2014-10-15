@@ -5,6 +5,18 @@ Gluten is what it all holds together.
 This is the glue code between popular android libraries.
 
 
+Logging and Autolayout moved!
+==============
+As gluten grew too large I moved some things to seperate frameworks:
+the logging can be found here:
+https://github.com/dpreussler/jodamoblog
+
+The famous autolayout moved to:
+https://github.com/dpreussler/android-autolayout
+
+
+
+
 Gradle
 ======
 
