@@ -90,9 +90,6 @@ Small helpers
 check out helper classes
 
 ```java
-StreamUtils.copy(inputstream, outputstream)
-
-Closeables.closeQuietly(stream1, stream2,...)
 
 ViewUtils.hideView(view1, view2,..)
 ViewUtils.showView(view1, view2,..)
