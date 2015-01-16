@@ -21,17 +21,9 @@ Gradle
 ======
 
 ```groovy
-compile ('de.jodamob.android:android-gluten:0.5.2') {
-    // exclude some dependencies because it was build as java not android project
-        exclude group: 'org.robolectric'
-}
+compile 'de.jodamob.android:android-gluten:0.6'
 ```
 
-or grab from build folder and put in your libs:
-
-```groovy
-compile files('libs/android-gluten-0.5.2.jar')
-```
 
 
 SafePhrase
