@@ -5,8 +5,8 @@ Gluten is what it all holds together.
 This is the glue code between popular android libraries.
 
 
-Logging and Autolayout moved!
-==============
+Logging and Autolayout moved, only glue-code classes for loggings are left here
+================================================================================
 As gluten grew too large I moved some things to seperate frameworks:
 the logging can be found here:
 https://github.com/dpreussler/jodamoblog
@@ -14,16 +14,22 @@ https://github.com/dpreussler/jodamoblog
 The famous autolayout moved to:
 https://github.com/dpreussler/android-autolayout
 
-
+Other utils moved to:
+https://github.com/dpreussler/androtil
 
 
 Gradle
 ======
 
 ```groovy
-compile 'de.jodamob.android:android-gluten:0.6'
-```
+compile 'de.jodamob.android:android-gluten:0.6' {
+        // exclude android classed, will be provided in android project
+        exclude group: 'org.robolectric'
+        // exclude all dependencies you dont need i.e.
+        exclude group: 'com.newrelic.agent.android'
+}
 
+```
 
 
 SafePhrase
