@@ -30,7 +30,7 @@ dependencies {
 	testCompile 'org.mockito:mockito-all:1.9.5'
     testCompile 'org.robolectric:robolectric:2.2'
     compile files('libs/espresso-1.1.jar')
-    compile 'de.jodamob.android:jodamoblog:1.0'
+    compile 'de.jodamob.android:jodamoblog:1.2'
     compile 'org.hamcrest:hamcrest-all:1.3'
     compile 'com.path:android-priority-jobqueue:0.9.9'
     compile 'org.robolectric:android-all:4.4_r1-robolectric-0'
