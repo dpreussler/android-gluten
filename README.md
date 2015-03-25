@@ -5,8 +5,8 @@ Gluten is what it all holds together.
 This is the glue code between popular android libraries.
 
 
-Logging and Autolayout moved, only glue-code classes for loggings are left here
-================================================================================
+Logging, Autolayout, SafePhrase moved, only glue-code classes for loggings are left here
+============================================================================================
 As gluten grew too large I moved some things to seperate frameworks:
 the logging can be found here:
 https://github.com/dpreussler/jodamoblog
@@ -15,14 +15,14 @@ The famous autolayout moved to:
 https://github.com/dpreussler/android-autolayout
 
 Other utils moved to:
-https://github.com/dpreussler/androtil
+https://github.com/dpreussler/androtils
 
 
 Gradle
 ======
 
 ```groovy
-compile 'de.jodamob.android:android-gluten:0.6' {
+compile ('de.jodamob.android:android-gluten:0.7.1') {
         // exclude android classed, will be provided in android project
         exclude group: 'org.robolectric'
         // exclude all dependencies you dont need i.e.
@@ -30,24 +30,6 @@ compile 'de.jodamob.android:android-gluten:0.6' {
 }
 
 ```
-
-
-SafePhrase
-==========
-Runtime safe version of the Phrase class
-
-Usage:
-Same as Phrase:
-
-```java
-SafePhrase.from(...).put(...).format()
-```
-
-Will not crash if elements are not found. Will do a wtf log instead (when combined with Crashlytics
-logger this would still send the stacktrace so you can fix it easily with next version).
-
-
-https://github.com/square/phrase
 
 
 New Relic Tracer for Retrofit
@@ -80,21 +62,6 @@ https://github.com/square/retrofit
 https://docs.newrelic.com/docs/mobile-apps/android-api
 https://github.com/square/okhttp
 
-
-
-Small helpers
-====================================
-
-check out helper classes
-
-```java
-
-ViewUtils.hideView(view1, view2,..)
-ViewUtils.showView(view1, view2,..)
-ViewUtils.removeView(view1, view2,..)
-ViewUtils.showOrHide(condition, view1, view2...)
-ViewUtils.showOrRemove(condition, view1, view2...)
-```
 
 
 
